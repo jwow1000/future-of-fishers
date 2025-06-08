@@ -7,6 +7,7 @@ export class waveAnimate {
     this.waveform = t => Math.sin(t * 2 * Math.PI);
     this.currentScroll = 0;
     this.phaseOffset = phase;
+    this.rafId = null;
 
     // Set currentScroll based on initial scroll
     this.currentScroll = element.scrollTop;
@@ -36,9 +37,16 @@ export class waveAnimate {
       // Use scrollTop for pixel precision (recommended for animation)
       this.element.style.transform = `translateY(${scrollTarget}px)`;
 
-      requestAnimationFrame(animateFrame);
+      this.rafId = requestAnimationFrame(animateFrame);
     };
 
-    requestAnimationFrame(animateFrame);
+    this.rafId = requestAnimationFrame(animateFrame);
+  }
+
+  stop() {
+    if (this.rafId !== null) {
+      cancelAnimationFrame(this.rafId);
+      this.rafId = null;
+    }
   }
 }

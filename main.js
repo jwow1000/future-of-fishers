@@ -1,12 +1,16 @@
 import { waveAnimate } from "./waveAnimate";
 window.Webflow ||= [];
 window.Webflow.push(() => {
-
+  let allowAnimation = true;
   let focusState = false;
   let currentFocus = null;
   const blurLayer =  document.querySelector(".fof-blur-layer");
   const mainWrapper = document.querySelector(".wrapper-fof");
+  const animationToggle = document.querySelector(".animation-toggle");
 
+  
+
+  
   const list1 = document.querySelector(".collection-list-9");
   const list2 = document.querySelector(".collection-list-10");
   const list3 = document.querySelector(".collection-list-11");
@@ -53,10 +57,23 @@ window.Webflow.push(() => {
 
   });
 
-  if(list1) {
-    animateList1.animate();
-    animateList2.animate();
-    animateList3.animate();
-    animateList4.animate();
-  }
+  animationToggle.addEventListener("click", () => {
+    // togle allowAnimation
+    allowAnimation = !allowAnimation;
+    if (allowAnimation) {
+      animateList1.animate();
+      animateList2.animate();
+      animateList3.animate();
+      animateList4.animate();
+    } else {
+      animateList1.stop();
+      animateList2.stop();
+      animateList3.stop();
+      animateList4.stop();
+    }
+    
+
+  })
+  animationToggle.click();
+
 });
