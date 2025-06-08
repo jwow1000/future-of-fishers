@@ -1,9 +1,22 @@
+import { waveAnimate } from "./waveAnimate";
 window.Webflow ||= [];
 window.Webflow.push(() => {
+
   let focusState = false;
   let currentFocus = null;
   const blurLayer =  document.querySelector(".fof-blur-layer");
   const mainWrapper = document.querySelector(".wrapper-fof");
+
+  const list1 = document.querySelector(".collection-list-9");
+  const list2 = document.querySelector(".collection-list-10");
+  const list3 = document.querySelector(".collection-list-11");
+  const list4 = document.querySelector(".collection-list-12");
+  
+  
+  const animateList1 = new waveAnimate(list1, 32000, true, 10, 0);
+  const animateList2 = new waveAnimate(list2, 28000, true, 20, 0.5);
+  const animateList3 = new waveAnimate(list3, 30000, true, 30, 0.25);
+  const animateList4 = new waveAnimate(list4, 24000, true, 30, 0.75);
   
   mainWrapper.addEventListener("click", (event) => {
     // console.log("click event", event.target);
@@ -39,4 +52,11 @@ window.Webflow.push(() => {
     }
 
   });
+
+  if(list1) {
+    animateList1.animate();
+    animateList2.animate();
+    animateList3.animate();
+    animateList4.animate();
+  }
 });
